@@ -7,6 +7,7 @@ OBJS   += $(CORE_DIR)/boards/$(BOARD)/init.o
 OBJS   += $(CORE_DIR)/freertos.o
 
 CFLAGS   += -I$(CORE_DIR)/
+CPPFLAGS += -I$(CORE_DIR)/boards/$(BOARD)
 CPPFLAGS += -I$(OPENCM3_DIR)/include
 LDFLAGS  += -L$(OPENCM3_DIR)/lib -L$(FREERTOS_DIR)/
 LDFLAGS  += -static -nostartfiles
