@@ -10,7 +10,7 @@ CFLAGS   += -I$(CORE_DIR)/
 CPPFLAGS += -I$(CORE_DIR)/boards/$(BOARD)
 CPPFLAGS += -I$(OPENCM3_DIR)/include
 LDFLAGS  += -L$(OPENCM3_DIR)/lib -L$(FREERTOS_DIR)/
-LDFLAGS  += -static -nostartfiles
+LDFLAGS  += -static -nostartfiles  -Xlinker -Map=output.map
 LDLIBS   += -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 LDSCRIPT        = generated.$(DEVICE).ld
 DEVICES_DATA    = $(OPENCM3_DIR)/ld/devices.data
