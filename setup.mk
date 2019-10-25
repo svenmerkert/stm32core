@@ -29,6 +29,9 @@ include $(OPENCM3_DIR)/mk/gcc-config.mk
 flash: binary.bin
 	st-flash write binary.bin $(FLASH_ADDR)
 
+install: binary.bin
+	st-flash write binary.bin $(FLASH_ADDR)
+
 
 $(OPENCM3_DIR)/lib/libopencm3_stm32l4.a:
 	cd $(OPENCM3_DIR); TARGETS="$(TARGETS)" make; cd -
