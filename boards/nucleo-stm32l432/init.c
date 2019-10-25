@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include "init.h"
 
-#define USART_CONSOLE USART2  /* PD5/6 , af7 */
+
 uint32_t SystemCoreClock;
 
 
