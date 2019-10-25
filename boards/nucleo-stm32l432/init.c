@@ -41,10 +41,8 @@ void clock_setup(void)
 {
 	rcc_set_msi_range(RCC_CR_MSIRANGE_4MHZ);
 	rcc_osc_on(RCC_MSI);
-	//rcc_wait_for_osc_ready(RCC_MSI);
 
 	rcc_osc_on(RCC_LSE);
-	//rcc_wait_for_osc_ready(RCC_LSE);
 
 	rcc_set_main_pll(RCC_PLLCFGR_PLLSRC_MSI, 1, 16, RCC_PLLCFGR_PLLP_DIV7, RCC_PLLCFGR_PLLQ_DIV2, RCC_PLLCFGR_PLLR_DIV2);
 	rcc_osc_on(RCC_PLL);
@@ -52,6 +50,7 @@ void clock_setup(void)
 
 	rcc_periph_clock_enable(RCC_GPIOA); // FOR CONSOLE UART
 	rcc_periph_clock_enable(RCC_GPIOB); // FOR USER LED
+	rcc_periph_clock_enable(RCC_USART1); // FOR TPUART UART
 	rcc_periph_clock_enable(RCC_USART2); // FOR CONSOLE UART
 
 	rcc_set_ppre2(RCC_CFGR_PPRE2_NODIV);
@@ -66,9 +65,27 @@ void clock_setup(void)
 	SystemCoreClock    = 32000000;
 }
 
-void console_usart_setup(void)
+void tpuart_usart_setup(void)
 {
 	/* Setup GPIO pins for USART2 TX. PA2 -> TX */
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9);
+	gpio_set_af(GPIOA, GPIO_AF7, GPIO9);
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO10);
+	gpio_set_af(GPIOA, GPIO_AF7, GPIO10);
+	usart_set_baudrate(TPUSART, 19200);
+	usart_set_databits(TPUSART, 9);
+	usart_set_stopbits(TPUSART, USART_STOPBITS_1);
+	usart_set_mode(TPUSART, USART_MODE_TX_RX);
+	usart_set_parity(TPUSART, USART_PARITY_EVEN);
+	usart_set_flow_control(TPUSART, USART_FLOWCONTROL_NONE);
+
+	/* Finally enable the USART. */
+	usart_enable(TPUSART);
+}
+
+void console_usart_setup(void)
+{
+	/* Setup GPIO pins for USART1 TX. PA2 -> TX */
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO2);
 	gpio_set_af(GPIOA, GPIO_AF7, GPIO2);
 
@@ -86,6 +103,7 @@ void console_usart_setup(void)
 void usart_setup(void)
 {
 	console_usart_setup();
+	tpuart_usart_setup();
 }
 
 void gpio_setup(void)
