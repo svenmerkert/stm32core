@@ -6,8 +6,11 @@ include $(CORE_DIR)/boards/$(BOARD)/config.mk
 OBJS   += $(CORE_DIR)/boards/$(BOARD)/init.o
 OBJS   += $(CORE_DIR)/boards/$(BOARD)/tpuart.o
 OBJS   += $(CORE_DIR)/ring_buffer.o
+OBJS   += $(CORE_DIR)/core.o
+
 
 CFLAGS   += -I$(CORE_DIR)/
+CPPFLAGS += -I$(CORE_DIR)/
 CPPFLAGS += -I$(CORE_DIR)/boards/$(BOARD)
 CPPFLAGS += -I$(OPENCM3_DIR)/include
 LDFLAGS  += -L$(OPENCM3_DIR)/lib
@@ -20,11 +23,10 @@ LIBDEPS         += $(OPENCM3_DIR)/lib/libopencm3_$(DEVICE_FAMILY).a
 
 
 ifdef WITH_FREERTOS
-OBJS      += $(CORE_DIR)/freertos.o
 LDFLAGS   += -L$(FREERTOS_DIR)/
 LDLIBS    += -lfreertos
 LIBDEPS   += $(FREERTOS_DIR)/libfreertos.a
-CFLAGS       += -DWITH_FREERTOS
+CFLAGS    += -DWITH_FREERTOS
 endif
 
 

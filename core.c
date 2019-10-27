@@ -1,10 +1,12 @@
-#include <errno.h>
-#include <stdio.h>
-#include <unistd.h>
+#include <stdint.h>
 #include <libopencm3/stm32/gpio.h>
+#ifdef WITH_FREERTOS
 #include <FreeRTOS.h>
 #include <task.h>
+#endif
 #include "init.h"
+
+static volatile uint64_t _millis = 0;
 
 void fatal_error(int error)
 {
@@ -27,6 +29,7 @@ void fatal_error(int error)
     }
 }
 
+#ifdef WITH_FREERTOS
 void vApplicationStackOverflowHook( TaskHandle_t xTask,
                                     signed char *pcTaskName )
 {
@@ -50,8 +53,7 @@ __attribute__((used)) void sv_call_handler(void) {
 __attribute__((used)) void pend_sv_handler(void) {
     xPortPendSVHandler();
 }
-
-static volatile uint64_t _millis = 0;
+#endif
 
 // Get the current value of the millis counter
 uint64_t millis() {
@@ -60,5 +62,7 @@ uint64_t millis() {
 
 void sys_tick_handler(void) {
 	_millis++;
+#ifdef WITH_FREERTOS
     xPortSysTickHandler();
+#endif
 }
