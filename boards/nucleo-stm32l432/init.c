@@ -2,10 +2,12 @@
 #include <libopencm3/cm3/systick.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
+#include <libopencm3/cm3/nvic.h>
 #include <errno.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "init.h"
+#include "tpuart.h"
 
 
 uint32_t SystemCoreClock;
@@ -65,23 +67,6 @@ void clock_setup(void)
 	SystemCoreClock    = 32000000;
 }
 
-void tpuart_usart_setup(void)
-{
-	/* Setup GPIO pins for USART2 TX. PA2 -> TX */
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO9);
-	gpio_set_af(GPIOA, GPIO_AF7, GPIO9);
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO10);
-	gpio_set_af(GPIOA, GPIO_AF7, GPIO10);
-	usart_set_baudrate(TPUSART, 19200);
-	usart_set_databits(TPUSART, 9);
-	usart_set_stopbits(TPUSART, USART_STOPBITS_1);
-	usart_set_mode(TPUSART, USART_MODE_TX_RX);
-	usart_set_parity(TPUSART, USART_PARITY_EVEN);
-	usart_set_flow_control(TPUSART, USART_FLOWCONTROL_NONE);
-
-	/* Finally enable the USART. */
-	usart_enable(TPUSART);
-}
 
 void console_usart_setup(void)
 {
