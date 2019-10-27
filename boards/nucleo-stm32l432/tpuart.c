@@ -46,11 +46,11 @@ void tpuart_usart_setup(void)
 
 void usart1_isr (void)
 {
-	static uint8_t data = 'A';
+	static uint8_t data = 0;
 
 	/* Check if we were called because of RXNE. */
-	if ((USART_CR1(TPUSART) & USART_CR1_RXNEIE) != 0) {
-
+	if ((USART_CR1(TPUSART) & USART_CR1_RXNEIE) != 0)
+	{
 		/* Indicate that we got data. */
 		gpio_toggle(LED_USER_PORT, LED_USER_PIN);
 
@@ -60,7 +60,8 @@ void usart1_isr (void)
 	}
 
 	/* Check if we were called because of TXE. */
-	if ((USART_CR1(TPUSART) & USART_CR1_TXEIE) != 0) {
+	if ((USART_CR1(TPUSART) & USART_CR1_TXEIE) != 0)
+	{
 		if(fifo_pop(&tx_buffer, &data) > 0)
 		{
 			/* Put data into the transmit register. */
