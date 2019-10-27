@@ -4,10 +4,18 @@
 #define LED_USER_PORT GPIOB
 #define LED_USER_PIN GPIO3
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void clock_setup(void);
 void usart_setup(void);
 void gpio_setup(void);
 void systick_setup(int freq);
+
+#ifdef __cplusplus
+}
+#endif
 
 /**
  * USART2 GPIO Configuration

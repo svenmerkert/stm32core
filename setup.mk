@@ -9,7 +9,6 @@ OBJS   += $(CORE_DIR)/ring_buffer.o
 OBJS   += $(CORE_DIR)/core.o
 
 
-CFLAGS   += -I$(CORE_DIR)/
 CPPFLAGS += -I$(CORE_DIR)/
 CPPFLAGS += -I$(CORE_DIR)/boards/$(BOARD)
 CPPFLAGS += -I$(OPENCM3_DIR)/include
