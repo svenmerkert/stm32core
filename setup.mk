@@ -4,8 +4,6 @@ FREERTOS_DIR    = $(CORE_DIR)/freertos
 include $(CORE_DIR)/boards/$(BOARD)/config.mk
 
 OBJS   += $(CORE_DIR)/boards/$(BOARD)/init.o
-OBJS   += $(CORE_DIR)/boards/$(BOARD)/tpuart.o
-OBJS   += $(CORE_DIR)/ring_buffer.o
 OBJS   += $(CORE_DIR)/core.o
 
 

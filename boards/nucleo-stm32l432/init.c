@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "init.h"
-#include "tpuart.h"
 
 
 uint32_t SystemCoreClock;
@@ -88,7 +87,7 @@ void console_usart_setup(void)
 void usart_setup(void)
 {
 	console_usart_setup();
-	tpuart_usart_setup();
+	//tpuart_usart_setup();
 }
 
 void gpio_setup(void)
