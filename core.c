@@ -60,6 +60,13 @@ uint64_t millis() {
     return _millis;
 }
 
+void delay(uint32_t delay)
+{
+	uint32_t wake = millis() + delay;
+	while (wake > millis());
+}
+
+
 void sys_tick_handler(void) {
 	_millis++;
 #ifdef WITH_FREERTOS
