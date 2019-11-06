@@ -8,6 +8,8 @@
 
 static volatile uint64_t _millis = 0;
 
+int __dso_handle;
+
 void fatal_error(int error)
 {
     for(;;)

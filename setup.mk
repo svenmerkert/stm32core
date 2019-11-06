@@ -31,6 +31,10 @@ all: binary.elf binary.hex binary.bin
 
 
 include $(OPENCM3_DIR)/mk/gcc-config.mk
+ifdef WITH_CPP
+LD		:= $(PREFIX)-g++
+LDFLAGS		+= --specs=nosys.specs
+endif
 
 
 .PHONY: clean all
