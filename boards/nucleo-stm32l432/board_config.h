@@ -1,0 +1,5 @@
+#pragma once
+
+#define USER_MEMORY_ADDR 0x0803F800
+#define USER_MEMORY_SIZE 0x800
+#define USER_MEMORY_PAGE 127
