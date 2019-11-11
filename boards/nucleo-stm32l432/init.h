@@ -4,6 +4,10 @@
 #define LED_USER_PORT GPIOB
 #define LED_USER_PIN GPIO3
 
+#define KNX_BTN_USER_PORT GPIOB
+#define KNX_BTN_USER_PIN GPIO4
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
