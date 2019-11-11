@@ -41,9 +41,11 @@ endif
 
 
 flash: binary.bin
+	st-flash erase
 	st-flash write binary.bin $(FLASH_ADDR)
 
 install: binary.bin
+	st-flash erase
 	st-flash write binary.bin $(FLASH_ADDR)
 
 
