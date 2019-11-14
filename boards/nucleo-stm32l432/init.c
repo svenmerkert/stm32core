@@ -95,6 +95,8 @@ void gpio_setup(void)
 	/* red led for buttons */
 	gpio_mode_setup(LED_USER_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED_USER_PIN);
 	gpio_toggle(LED_USER_PORT, LED_USER_PIN);
+
+	gpio_mode_setup(KNX_BTN_USER_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, KNX_BTN_USER_PIN);
 }
 
 
