@@ -4,7 +4,7 @@
 #include <FreeRTOS.h>
 #include <task.h>
 #endif
-#include "init.h"
+#include <board_config.h>
 
 static volatile uint64_t _millis = 0;
 

@@ -3,7 +3,8 @@ FREERTOS_DIR    = $(CORE_DIR)/freertos
 
 include $(CORE_DIR)/boards/$(BOARD)/config.mk
 
-OBJS   += $(CORE_DIR)/boards/$(BOARD)/init.o
+OBJS   += $(CORE_DIR)/boards/$(BOARD)/console.o
+OBJS   += $(CORE_DIR)/boards/$(BOARD)/board_config.o
 OBJS   += $(CORE_DIR)/core.o
 
 
