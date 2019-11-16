@@ -42,12 +42,18 @@ endif
 
 
 flash: binary.bin
+	st-flash read backup.img 0x0803F800 0x800
 	st-flash erase
+	st-flash write backup.img 0x0803F800
 	st-flash write binary.bin $(FLASH_ADDR)
+	rm backup.img
 
 install: binary.bin
+	st-flash read backup.img 0x0803F800 0x800
 	st-flash erase
+	st-flash write backup.img 0x0803F800
 	st-flash write binary.bin $(FLASH_ADDR)
+	rm backup.img
 
 
 $(OPENCM3_DIR)/lib/libopencm3_stm32l4.a:
