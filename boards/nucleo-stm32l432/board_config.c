@@ -13,9 +13,11 @@ void clock_setup(void)
     rcc_osc_on(RCC_MSI);
     rcc_osc_on(RCC_LSE);
 
-    rcc_set_main_pll(RCC_PLLCFGR_PLLSRC_MSI, 1, 16, RCC_PLLCFGR_PLLP_DIV7, RCC_PLLCFGR_PLLQ_DIV2, RCC_PLLCFGR_PLLR_DIV2);
+    rcc_set_main_pll(RCC_PLLCFGR_PLLSRC_MSI, 1, 16, (0x7 << 27), RCC_PLLCFGR_PLLQ_DIV2, RCC_PLLCFGR_PLLR_DIV2);
     rcc_osc_on(RCC_PLL);
     //rcc_wait_for_osc_ready(RCC_PLL);
+
+    RCC_CR |= RCC_CR_MSIPLLEN;
 
     rcc_set_ppre2(RCC_CFGR_PPRE2_NODIV);
     rcc_set_ppre1(RCC_CFGR_PPRE1_NODIV);
