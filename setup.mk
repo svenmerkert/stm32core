@@ -1,5 +1,4 @@
 OPENCM3_DIR     = $(CORE_DIR)/libopencm3
-FREERTOS_DIR    = $(CORE_DIR)/freertos
 
 include $(CORE_DIR)/boards/$(BOARD)/config.mk
 
@@ -28,7 +27,7 @@ CFLAGS    += -DWITH_FREERTOS
 endif
 
 
-all: binary.elf binary.hex binary.bin
+all: $(PROJECT).elf $(PROJECT).hex $(PROJECT).bin
 
 
 include $(OPENCM3_DIR)/mk/gcc-config.mk
@@ -41,18 +40,18 @@ endif
 .PHONY: clean all
 
 
-flash: binary.bin
+flash: $(PROJECT).bin
 	st-flash read backup.img 0x0803F800 0x800
 	st-flash erase
 	st-flash write backup.img 0x0803F800
-	st-flash write binary.bin $(FLASH_ADDR)
+	st-flash write $(PROJECT).bin $(FLASH_ADDR)
 	rm backup.img
 
-install: binary.bin
+install: $(PROJECT).bin
 	st-flash read backup.img 0x0803F800 0x800
 	st-flash erase
 	st-flash write backup.img 0x0803F800
-	st-flash write binary.bin $(FLASH_ADDR)
+	st-flash write $(PROJECT).bin $(FLASH_ADDR)
 	rm backup.img
 
 
