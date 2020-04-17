@@ -1,4 +1,5 @@
 OPENCM3_DIR     = $(CORE_DIR)/libopencm3
+FREERTOS_DIR     = $(CORE_DIR)/freertos
 
 include $(CORE_DIR)/boards/$(BOARD)/config.mk
 
