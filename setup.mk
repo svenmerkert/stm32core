@@ -3,8 +3,7 @@ FREERTOS_DIR     = $(CORE_DIR)/freertos
 
 include $(CORE_DIR)/boards/$(BOARD)/config.mk
 
-OBJS   += $(CORE_DIR)/boards/$(BOARD)/console.o
-OBJS   += $(CORE_DIR)/boards/$(BOARD)/board_config.o
+
 OBJS   += $(CORE_DIR)/core.o
 
 
@@ -13,7 +12,11 @@ CPPFLAGS += -I$(CORE_DIR)/boards/$(BOARD)
 CPPFLAGS += -I$(OPENCM3_DIR)/include
 LDFLAGS  += -L$(OPENCM3_DIR)/lib
 LDFLAGS  += -static -nostartfiles  -Xlinker -Map=output.map
+ifdef MINIMAL_LIBS
+LDLIBS   += -Wl,--start-group -lgcc -Wl,--end-group
+else
 LDLIBS   += -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
+endif
 LDSCRIPT        = generated.$(DEVICE).ld
 DEVICES_DATA    = $(OPENCM3_DIR)/ld/devices.data
 LDLIBS          += -lopencm3_$(DEVICE_FAMILY)
