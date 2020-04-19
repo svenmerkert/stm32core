@@ -1,17 +1,13 @@
 OPENCM3_DIR     = $(CORE_DIR)/libopencm3
 FREERTOS_DIR     = $(CORE_DIR)/freertos
 
-include $(CORE_DIR)/boards/$(BOARD)/config.mk
-
-
 OBJS   += $(CORE_DIR)/core.o
 
 
 CPPFLAGS += -I$(CORE_DIR)/
-CPPFLAGS += -I$(CORE_DIR)/boards/$(BOARD)
 CPPFLAGS += -I$(OPENCM3_DIR)/include
 LDFLAGS  += -L$(OPENCM3_DIR)/lib
-LDFLAGS  += -static -nostartfiles  -Xlinker -Map=output.map
+LDFLAGS  += -static -nostartfiles  -Xlinker -Map=$(PROJECT).map
 ifdef MINIMAL_LIBS
 LDLIBS   += -Wl,--start-group -lgcc -Wl,--end-group
 else
